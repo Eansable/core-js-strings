@@ -131,7 +131,7 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  return str.repeat(times);
+  return times > 0 ? str.repeat(times) : '';
 }
 
 /**
@@ -147,7 +147,9 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  let res = str.indexOf();
+  res += res;
+  return res > -20 ? str.replace(value, '') : '';
 }
 
 /**
@@ -231,9 +233,9 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  return `${minutes < 10 ? '0' : ''}${minutes}:${
-    seconds < 10 ? '0' : ''
-  }${seconds}`;
+  const minuteString = minutes.toString().padStart(2, 0);
+  const secondsString = seconds.toString().padStart(2, 0);
+  return `${minuteString}:${secondsString}`;
 }
 
 /**
@@ -321,7 +323,23 @@ function countVowels(str) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-  return str.toUpperCase() === str.split('').reverse().join('').toUpperCase();
+  return (
+    str
+      .toUpperCase()
+      .replace(' ', '')
+      .replace('!', '')
+      .replace('?', '')
+      .replace(',', '') ===
+    str
+      .split('')
+      .reverse()
+      .join('')
+      .toUpperCase()
+      .replace(' ', '')
+      .replace('!', '')
+      .replace('?', '')
+      .replace(',', '')
+  );
 }
 
 /**
@@ -478,8 +496,62 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cardList = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  return cardList.findIndex((item) => item === value);
 }
 
 module.exports = {
